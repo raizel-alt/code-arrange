@@ -65,13 +65,15 @@
     }
     .line-numbers {
       background: #f4f4f4;
-      color: #888;
+      color: #000; /* Changed to black */
       text-align: right;
-      padding: 10px;
+      padding: 10px 5px;
       user-select: none;
+      width: 40px; /* Fixed width */
+      flex-shrink: 0; /* Prevents shrinking/stretching */
     }
     .line-numbers div {
-      padding: 0 5px;
+      line-height: 1.4;
     }
     .code-content {
       padding: 10px;
@@ -112,7 +114,11 @@
 
   <script>
     function renderCode() {
-      const code = document.getElementById("codeInput").value;
+      let code = document.getElementById("codeInput").value;
+
+      // Remove leading/trailing blank lines
+      code = code.replace(/^\s*\n/, "").replace(/\s*$/, "");
+
       const font = document.getElementById("fontPicker").value;
       const size = document.getElementById("fontSize").value + "px";
       const display = document.getElementById("codeDisplay");
